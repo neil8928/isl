@@ -55,6 +55,7 @@ class UserController extends Controller
 											->where('web.grupoopciones.activo', '=', 1)
 											->where('web.rolopciones.rol_id', '=', $tusuario->rol_id)
 											->where('web.rolopciones.ver', '=', 1)
+											->where('web.opciones.indopcweb', '=', 0)
 											->groupBy('web.grupoopciones.id')
 											->groupBy('web.grupoopciones.nombre')
 											->groupBy('web.grupoopciones.icono')
@@ -63,11 +64,18 @@ class UserController extends Controller
 											->orderBy('web.grupoopciones.orden', 'asc')
 											->get();
 
-					$listaopciones    	= 	WEBRolOpcion::where('rol_id', '=', $tusuario->rol_id)
-											->where('ver', '=', 1)
-											->where('indopcweb', '=', 0)
-											->orderBy('orden', 'asc')
-											->pluck('opcion_id')
+					// $listaopciones    	= 	WEBRolOpcion::where('rol_id', '=', $tusuario->rol_id)
+					// 						->where('ver', '=', 1)
+					// 						->orderBy('orden', 'asc')
+					// 						->pluck('opcion_id')
+					// 						->toArray();
+					$listaopciones    	= 	WEBRolOpcion::from('web.rolopciones as RO')
+											->join('web.opciones as O','RO.opcion_id','=','O.id')
+											->where('RO.rol_id', '=', $tusuario->rol_id)
+											->where('RO.ver', '=', 1)
+											->where('O.indopcweb','=',0)
+											->orderBy('RO.orden', 'asc')
+											->pluck('RO.opcion_id')
 											->toArray();
 
 
