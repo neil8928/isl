@@ -20,6 +20,10 @@ Route::group(['middleware' => ['guestaw']], function () {
 });
 
 Route::get('/cerrarsession', 'UserController@actionCerrarSesion');
+Route::any('/guardar-lista-contabilidad-sunat', 'CantabilidadController@actionGuardarListaContabilidadSunat');
+Route::any('/guardar-xml-pdf-sunat', 'CantabilidadController@actionGuardarXmlPdfSunat');
+
+
 
 Route::group(['middleware' => ['authaw']], function () {
 

@@ -8,16 +8,35 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Crypt;
 use App\User,App\Grupoopcion,App\Rol,App\RolOpcion,App\Opcion,App\Documento;
+
+use App\RespaldoDocSunat;
+
 use View;
 use Session;
 use Hashids;
 use ZipArchive;
 use App\Biblioteca\BotTest;
 use App\CONFacturasrecibidassunat;
-
+use DateTime;
+use DateInterval;
+use DatePeriod;
+use App\Traits\GeneralesTraits;
 
 class CantabilidadController extends Controller
 {
+
+    use GeneralesTraits;
+
+	public function actionGuardarXmlPdfSunat()
+	{
+		$this->sunatarchivos();
+	}
+
+	public function actionGuardarListaContabilidadSunat()
+	{
+
+		$this->sunatlista();
+	}
 
 
 	public function actionAjaxListarFacturasEntreFechas(Request $request)

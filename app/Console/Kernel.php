@@ -10,6 +10,9 @@ use App\Console\Commands\NotificacionTamizajeFinalDiaRioja;
 use App\Console\Commands\NotificacionTamizajeFinalDiaBellavista;
 use App\Console\Commands\NotificacionTamizajeFinalDiaIsl;
 
+use App\Console\Commands\NotificacionSunat;
+use App\Console\Commands\NotificacionSunatArchivo;
+
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -28,7 +31,9 @@ class Kernel extends ConsoleKernel
         NotificacionTamizajeFinalDia::class,
         NotificacionTamizajeFinalDiaRioja::class,
         NotificacionTamizajeFinalDiaBellavista::class,
-        NotificacionTamizajeFinalDiaIsl::class
+        NotificacionTamizajeFinalDiaIsl::class,
+        NotificacionSunat::class,
+        NotificacionSunatArchivo::class
     ];
 
     /**
@@ -55,6 +60,22 @@ class Kernel extends ConsoleKernel
         //ISL
         $schedule->command('notificacion:tamizajefinalisl')->dailyAt('10:00');
         $schedule->command('notificacion:tamizajefinalisl')->dailyAt('20:00');
+
+
+
+        //SUNAT
+
+        $schedule->command('notificacion:sunat')->dailyAt('01:00');
+        $schedule->command('notificacion:sunat')->dailyAt('02:00');
+
+
+        $schedule->command('notificacion:sunatar')->dailyAt('02:30');
+        $schedule->command('notificacion:sunatar')->dailyAt('03:30');
+        $schedule->command('notificacion:sunatar')->dailyAt('04:30');
+        $schedule->command('notificacion:sunatar')->dailyAt('05:30');
+        $schedule->command('notificacion:sunatar')->dailyAt('06:30');
+
+
 
 
     }
